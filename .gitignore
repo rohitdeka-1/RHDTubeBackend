@@ -13,6 +13,7 @@ production
 misc
 .DS_Store
 .pem
+
 .env
 
 debug

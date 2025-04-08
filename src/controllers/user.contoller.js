@@ -3,7 +3,10 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { uplodaOnCloudinary } from "../utils/cloudinary.js";
 
+import { ApiResponse } from "../utils/ApiResponse.js";
+
 const registerUser = asyncHandler(async (req, res) => {
+
   // get user details from frontend
   // validation ->
   // Not empty
@@ -54,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.create({
-    fullName,
+    fullName, 
     avatar: avatar.url,
     cover: cover?.url || "",
     email,
@@ -70,4 +73,10 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(500,"Something went wrong while registering user");
   }
 
+  return res.status(201).json(
+    new ApiResponse(200,createdUser,"User Registered successfully")
+  )
 });
+
+ 
+export {registerUser}
